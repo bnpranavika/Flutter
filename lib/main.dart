@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; // ✅ Provider package
+import 'package:provider/provider.dart';
+
+// Your existing imports
 import 'Flutter_Widgets.dart'; // MyTextWidget
 import 'Navigators.dart'; // HomeScreen, SecondScreen
 import 'Media_Queries_&_breakpoints.dart'; // Responsive layouts
 import 'Navigation_With_Namedroutes.dart'; // HomePage, AboutPage, ContactPage
 import 'Responsive_UI.dart'; // Responsive UI demo
-import 'Setstate_&_Provider.dart'; // ✅ For Provider demo
-import 'Statefull_Widgets.dart'; // ✅ Stateful demo
-import 'Stateless_Widgets.dart'; // ✅ New import for Stateless demo
+import 'Setstate_&_Provider.dart'; // For Provider demo
+import 'Statefull_Widgets.dart'; // Stateful demo
+import 'Stateless_Widgets.dart'; // Stateless demo
+import 'UI_Elements.dart'; // UIElementsTab
+import 'Themes.dart'; // ThemeDemoScreen
+import 'Form_Validation.dart'; // FormDemoScreen
+import 'Animated_UI.dart'; // AnimatedUITab
+import 'Animated_Types.dart'; // AnimatedTypesTab
+import 'API_Fetched.dart'; // ✅ Updated API Fetch tab
 
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (_) => GlobalCounter(), // ✅ from Setstate_&_Provider.dart
+      create: (_) => GlobalCounter(),
       child: const MyApp(),
     ),
   );
@@ -28,7 +36,27 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Multi-Tab Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        textTheme: const TextTheme(
+          headlineMedium: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.deepPurple,
+          ),
+          bodyMedium: TextStyle(
+            fontSize: 16,
+            color: Colors.black87,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.deepPurple,
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          ),
+        ),
       ),
       home: const TabDemoPage(),
     );
@@ -41,7 +69,7 @@ class TabDemoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 8, // ✅ Now 8 tabs
+      length: 14, // ✅ Updated to match the 14 tabs
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Flutter Multi-Tab Demo"),
@@ -55,20 +83,32 @@ class TabDemoPage extends StatelessWidget {
               Tab(text: "Named Routes Tab"),
               Tab(text: "SetState & Provider"),
               Tab(text: "Stateful Widgets"),
-              Tab(text: "Stateless Widgets"), // ✅ New tab
+              Tab(text: "Stateless Widgets"),
+              Tab(text: "UI Elements"),
+              Tab(text: "Themes"),
+              Tab(text: "Form"),
+              Tab(text: "Animations"),
+              Tab(text: "Animations 2"),
+              Tab(text: "API Fetch"), // 14th tab
             ],
           ),
         ),
         body: const TabBarView(
           children: [
-            MyTextWidget(), // Tab 1
-            NavigationTab(), // Tab 2
-            ResponsiveWrapper(), // Tab 3
-            ResponsiveHome(), // Tab 4
-            NamedRoutesWrapper(), // Tab 5
-            CombinedCounterScreen(), // Tab 6 (Setstate & Provider)
-            MyStatefulWidget(), // Tab 7 (Statefull_Widgets)
-            MyStatelessWidget(), // ✅ Tab 8 (Stateless_Widgets)
+            MyTextWidget(),
+            NavigationTab(),
+            ResponsiveWrapper(),
+            ResponsiveHome(),
+            NamedRoutesWrapper(),
+            CombinedCounterScreen(),
+            MyStatefulWidget(),
+            MyStatelessWidget(),
+            UIElementsTab(),
+            ThemeDemoScreen(),
+            FormDemoScreen(),
+            AnimatedUITab(),
+            AnimatedTypesTab(),
+            ApiFetchTab(), // 14th tab content
           ],
         ),
       ),
@@ -120,7 +160,7 @@ class NamedRoutesWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomePageTab();
+    return const HomePageTab();
   }
 }
 
@@ -159,7 +199,7 @@ class HomePageTab extends StatelessWidget {
   }
 }
 
-/// About Page for tab
+/// About Page
 class AboutPageTab extends StatelessWidget {
   const AboutPageTab({super.key});
 
@@ -177,7 +217,7 @@ class AboutPageTab extends StatelessWidget {
   }
 }
 
-/// Contact Page for tab
+/// Contact Page
 class ContactPageTab extends StatelessWidget {
   const ContactPageTab({super.key});
 
